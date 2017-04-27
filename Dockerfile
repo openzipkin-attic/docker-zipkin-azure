@@ -17,6 +17,10 @@ MAINTAINER OpenZipkin "http://zipkin.io/"
 ENV ZIPKIN_AZURE_REPO https://jcenter.bintray.com
 ENV ZIPKIN_AZURE_VERSION 0.1.5
 
-RUN curl -SL $ZIPKIN_AZURE_REPO/io/zipkin/azure/zipkin-autoconfigure-collector-eventhub/$ZIPKIN_AZURE_VERSION/zipkin-autoconfigure-collector-eventhub-$ZIPKIN_AZURE_VERSION-module.jar > eventhub.jar
+RUN apk add unzip && \
+  curl -SL $ZIPKIN_AZURE_REPO/io/zipkin/azure/zipkin-autoconfigure-collector-eventhub/$ZIPKIN_AZURE_VERSION/zipkin-autoconfigure-collector-eventhub-$ZIPKIN_AZURE_VERSION-module.jar > eventhub.jar && \
+  unzip eventhub.jar -d eventhub && \
+  rm eventhub.jar && \
+  apk del unzip
 
-CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; java ${JAVA_OPTS} -Dloader.path=eventhub.jar -Dspring.profiles.active=eventhub -cp . org.springframework.boot.loader.PropertiesLauncher
+CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; java ${JAVA_OPTS} -Dloader.path=eventhub -Dspring.profiles.active=eventhub -cp . org.springframework.boot.loader.PropertiesLauncher
