@@ -11,11 +11,11 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 #
-FROM openzipkin/zipkin:2.5.0
+FROM openzipkin/zipkin:2.6.0
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV ZIPKIN_AZURE_REPO https://jcenter.bintray.com
-ENV ZIPKIN_AZURE_VERSION 0.3.8
+ENV ZIPKIN_AZURE_VERSION 0.3.9
 
 RUN apk add unzip && \
   curl -SL $ZIPKIN_AZURE_REPO/io/zipkin/azure/zipkin-autoconfigure-collector-eventhub/$ZIPKIN_AZURE_VERSION/zipkin-autoconfigure-collector-eventhub-$ZIPKIN_AZURE_VERSION-module.jar > eventhub.jar && \
