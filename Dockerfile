@@ -15,7 +15,7 @@ FROM openzipkin/zipkin:2.7.5
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV ZIPKIN_AZURE_REPO https://jcenter.bintray.com
-ENV ZIPKIN_AZURE_VERSION 0.4.2
+ENV ZIPKIN_AZURE_VERSION 0.4.3
 
 RUN apk add unzip && \
   curl -SL $ZIPKIN_AZURE_REPO/io/zipkin/azure/zipkin-autoconfigure-collector-eventhub/$ZIPKIN_AZURE_VERSION/zipkin-autoconfigure-collector-eventhub-$ZIPKIN_AZURE_VERSION-module.jar > eventhub.jar && \
